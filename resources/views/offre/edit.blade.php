@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
+
 
 <head>
   <!-- Required meta tags -->
@@ -7,11 +8,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>INSTI DASHBOARD</title>
   <!-- plugins:css -->
-  <link rel="stylesheet" href="css/themify-icons.css">
-  <link rel="stylesheet" href="css/vendor.bundle.base.css">
-  <link rel="stylesheet" href="css/vendor.bundle.addons.css">
+
+  <link rel="stylesheet" href="{{asset('css/themify-icons.css')}}">
+  <link rel="stylesheet" href="{{asset('css/vendor.bundle.base.css')}}">
+  <link rel="stylesheet" href="{{asset('css/vendor.bundle.addons.css')}}">
  
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="{{asset('css/style.css')}}">
   <!-- endinject -->
   <link rel="shortcut icon" href="images/favicon.png" />
 </head>
@@ -21,25 +23,18 @@
     <!-- partial:../../partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        {{-- <a class="navbar-brand brand-logo mr-5" href="index.html"><img src="http://www.urbanui.com/justdo/template/images/logo-white.svg" class="mr-2" alt="logo"/></a>
-        <a class="navbar-brand brand-logo-mini" href="index.html"><img src="http://www.urbanui.com/justdo/template/images/logo-mini.svg" alt="logo"/></a> --}}
+        <a class="navbar-brand brand-logo mr-5" href="index.html"><img src="http://www.urbanui.com/justdo/template/images/logo-white.svg" class="mr-2" alt="logo"/></a>
+        <a class="navbar-brand brand-logo-mini" href="index.html"><img src="http://www.urbanui.com/justdo/template/images/logo-mini.svg" alt="logo"/></a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
           <span class="ti-layout-grid2"></span>
         </button>
         <ul class="navbar-nav navbar-nav-right">
-          
           <li class="nav-item nav-profile dropdown">
             <a class="nav-link" href="#" data-toggle="dropdown" id="profileDropdown">
               <img src="images/faces/face28.jpg" alt="profile"/>
             </a>
-            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-              <a class="dropdown-item">
-                <i class="ti-power-off text-primary"></i>
-                Logout
-              </a>
-            </div>
           </li>
         </ul>
         <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
@@ -71,59 +66,57 @@
               </ul>
             </div>
           </li>
-      
         </ul>
       </nav>
+
+      
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
-          <div class="card">
-            <div class="card-body">
-              <h4 class="card-title">Table de données</h4>
-              <div class="row">
-                <div class="col-12">
-                  <div class="table-responsive">
-                    <table id="order-listing" class="table">
-                     
+          <div class="row grid-margin">
+            <div class="col-12">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Modifier la catégorie</h4>
+                  <form action="{{ url('/modifieroffres/'.$offre->id)}}" method="POST">
+                      @csrf
+                      {{-- @method('DELETE') --}}
 
-                        <thead>
-                          <tr>
-                            <th>ID</th>
-                            <th>Type de Données</th>
-                            <th>Catégorie de Données</th>
-                            <th>Nom de la Catégorie</th>
-                            <th>Description de la Catégorie</th>
-                            <th>Action</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          @foreach($offres as $offre)
-                          <tr>
-                            <td>{{ $offre->id }}</td>
-                            <td>{{ $offre->data_type }}</td>
-                            <td>{{ $offre->data_cat }}</td>
-                            <td>{{ $offre->cat_name }}</td>
-                            <td>{{ $offre->cat_desc }}</td>
-                            <td>
-                              <a href="{{ url('/offres/show/'.$offre->id) }}" class="btn btn-outline-primary">Voir</a>
-                              <a href="{{ url('/offres/edit/'.$offre->id) }}" class="btn btn-outline-warning">Modifier</a>
-                              <form action="{{ url('/offres/destroy/'.$offre->id) }}" method="post" class="d-inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-outline-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette offre?')">Supprimer</button>
-                              </form>
-                            </td>
-                          </tr>
-                          @endforeach
-                        </tbody>
-                    </table>
-                  </div>
-                </div>
+                      <div class="form-group row">
+                          <label class="col-lg-3 col-form-label">Type de Données</label>
+                          <div class="col-lg-8">
+                              <input class="form-control" type="text" name="data_type" value="{{ $offre->data_type }}" />
+                          </div>
+                      </div>
+                      <div class="form-group row">
+                          <label class="col-lg-3 col-form-label">Catégorie de Données</label>
+                          <div class="col-lg-8">
+                              <input class="form-control" type="text" name="data_cat" value="{{ $offre->data_cat }}" />
+                          </div>
+                      </div>
+                      <div class="form-group row">
+                          <label class="col-lg-3 col-form-label">Nom de la catégorie</label>
+                          <div class="col-lg-8">
+                              <input class="form-control" type="text" name="cat_name" value="{{ $offre->cat_name }}" />
+                          </div>
+                      </div>
+                      <div class="form-group row">
+                          <label class="col-lg-3 col-form-label">Description de la Catégorie</label>
+                          <div class="col-lg-8">
+                              <input class="form-control" type="text" name="cat_desc" value="{{ $offre->cat_desc }}" />
+                          </div>
+                      </div>
+
+                      <div class="form-group row">
+                          <div class="col-lg-8 offset-lg-3">
+                              <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+                          </div>
+                      </div>
+                  </form>
+              </div>
               </div>
             </div>
           </div>
-
-          
         </div>
         <!-- content-wrapper ends -->
         <!-- partial:../../partials/_footer.html -->
@@ -141,18 +134,19 @@
   </div>
   <!-- container-scroller -->
   <!-- plugins:js -->
-  <script src="js/vendor.bundle.base.js"></script>
-  <script src="js/vendor.bundle.addons.js"></script>
+  <script src="{{asset('js/vendor.bundle.base.js')}}"></script>
+  <script src="{{asset('js/vendor.bundle.addons.js')}}"></script>
   <!-- endinject -->
   <!-- inject:js -->
-  <script src="js/off-canvas.js"></script>
-  <script src="js/hoverable-collapse.js"></script>
-  <script src="js/template.js"></script>
-  <script src="js/settings.js"></script>
-  <script src="js/todolist.js"></script>
+  <script src="{{asset('js/off-canvas.js')}}"></script>
+  <script src="{{asset('js/hoverable-collapse.js')}}"></script>
+  <script src="{{asset('js/template.js')}}"></script>
+  <script src="{{asset('js/settings.js')}}"></script>
+  <script src="{{asset('js/todolist.js')}}"></script>
   <!-- endinject -->
   <!-- Custom js for this page-->
-  <script src="js/data-table.js"></script>
+  <script src="{{asset('js/form-validation.js')}}"></script>
+  <script src="{{asset('js/bt-maxLength.js')}}"></script>
   <!-- End custom js for this page-->
 </body>
 

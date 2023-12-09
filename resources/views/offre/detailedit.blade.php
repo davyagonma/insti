@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
+
 
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>INSTI DETAILS OFFRES</title>
+  <title>INSTI DASHBOARD</title>
   <!-- plugins:css -->
+
   <link rel="stylesheet" href="{{asset('css/themify-icons.css')}}">
   <link rel="stylesheet" href="{{asset('css/vendor.bundle.base.css')}}">
   <link rel="stylesheet" href="{{asset('css/vendor.bundle.addons.css')}}">
@@ -21,15 +23,14 @@
     <!-- partial:../../partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        {{-- <a class="navbar-brand brand-logo mr-5" href="index.html"><img src="http://www.urbanui.com/justdo/template/images/logo-white.svg" class="mr-2" alt="logo"/></a>
-        <a class="navbar-brand brand-logo-mini" href="index.html"><img src="http://www.urbanui.com/justdo/template/images/logo-mini.svg" alt="logo"/></a> --}}
+        <a class="navbar-brand brand-logo mr-5" href="index.html"><img src="http://www.urbanui.com/justdo/template/images/logo-white.svg" class="mr-2" alt="logo"/></a>
+        <a class="navbar-brand brand-logo-mini" href="index.html"><img src="http://www.urbanui.com/justdo/template/images/logo-mini.svg" alt="logo"/></a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
           <span class="ti-layout-grid2"></span>
         </button>
         <ul class="navbar-nav navbar-nav-right">
-          
           <li class="nav-item nav-profile dropdown">
             <a class="nav-link" href="#" data-toggle="dropdown" id="profileDropdown">
               <img src="images/faces/face28.jpg" alt="profile"/>
@@ -65,71 +66,60 @@
               </ul>
             </div>
           </li>
-      
         </ul>
       </nav>
+
+      
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
-          <div class="card">
-            <div class="card-body">
-              <h4 class="card-title">Table de données</h4>
-              <div class="row">
-                <div class="col-12">
-                  <div class="table-responsive">
-                    <table id="order-listing" class="table">
-                     
+          <div class="row grid-margin">
+            <div class="col-12">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Modifier l'offre de la catégorie {{ $offre->data_cat }}</h4>
+                  <form action="{{ url('/offresdetail/edit/'.$offre->id)}}" method="POST">
+                    @csrf
+                      {{-- @method('DELETE') --}}
 
-                        <thead>
-                          <tr>
-                            <th>ID</th>
-                            <th>Catégorie de Données</th>
-                            <th>Nom</th>
-                            <th>Options de la Catégorie</th>
-                            <th>Admission à la Catégorie</th>
-                            <th>Les profils de sorties</th>
-                            <th>Actions</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                            @if($detailsoffre)
-                                @foreach($detailsoffre as $offre)
-                                    <tr>
-                                        <td>{{ $offre->id }}</td>
-                                        <td>{{ $offre->data_cat }}</td>
-                                        <td>{{ $offre->nom }}</td>
-                                        <td>{{ $offre->options }}</td>
-                                        <td>{{ $offre->admission }}</td>
-                                        <td>{!! nl2br($offre->ProfilsSortie) !!}</td>
-                                        <td>
-                                            <a href="{{ url('/offresdetail/view/'.$offre->id) }}" class="btn btn-outline-warning">Modifier</a>
-                                            <form action="{{ url('/offresdetail/destroy/'.$offre->id) }}" method="post" class="d-inline">
-                                              @csrf
-                                              @method('DELETE')
-                                              <button type="submit" class="btn btn-outline-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette offre?')">Supprimer</button>
-                                            </form>
-                                          </td>
-                                    </tr>
-                                @endforeach
-                            @else
-                                <tr>
-                                    <td colspan="6">Aucune offre trouvée.</td>
-                                </tr>
-                            @endif
-                        </tbody>
-                    </table>
-                    <div class="form-group row">
+                      <div class="form-group row">
+                          <label class="col-lg-3 col-form-label">Catégorie de Données</label>
+                          <div class="col-lg-8">
+                              <input class="form-control" type="text" name="data_cat" value="{{ $offre->data_cat }}" />
+                          </div>
+                      </div>
+                      <div class="form-group row">
+                          <label class="col-lg-3 col-form-label">Nom </label>
+                          <div class="col-lg-8">
+                              <input class="form-control" type="text" name="nom" value="{{ $offre->nom }}" />
+                          </div>
+                      </div>
+                      <div class="form-group row">
+                          <label class="col-lg-3 col-form-label">Options de la Catégorie</label>
+                          <div class="col-lg-8">
+                              <input class="form-control" type="text" name="options" value="{{ $offre->options }}" />
+                          </div>
+                      </div>
+                      <div class="form-group row">
+                          <label class="col-lg-3 col-form-label">Admission à la Catégorie</label>
+                           <div class="col-lg-8">
+                              <input class="form-control" type="text" name="admission" value="{{ $offre->admission }}" />
+                      </div>
+                      <div class="form-group row">
+                          <label class="col-lg-3 col-form-label">Les profils de Sorties</label>
+                           <div class="col-lg-8">
+                              <input class="form-control" type="text" name="ProfilsSortie" value="{{ $offre->ProfilsSortie }}" />
+                      </div> 
+                      <div class="form-group row">
                         <div class="col-lg-8 offset-lg-3">
-                            <button type="submit" class="btn btn-primary">AJOUTER UN DETAIL</button>
+                            <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
                         </div>
-                    </div>
-                  </div>
-                </div>
+                      </div>
+                  </form>
+              </div>
               </div>
             </div>
           </div>
-
-          
         </div>
         <!-- content-wrapper ends -->
         <!-- partial:../../partials/_footer.html -->
@@ -158,7 +148,8 @@
   <script src="{{asset('js/todolist.js')}}"></script>
   <!-- endinject -->
   <!-- Custom js for this page-->
-  <script src="{{asset('js/data-table.js')}}"></script>
+  <script src="{{asset('js/form-validation.js')}}"></script>
+  <script src="{{asset('js/bt-maxLength.js')}}"></script>
   <!-- End custom js for this page-->
 </body>
 

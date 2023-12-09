@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('data_cat')->unique();
             $table->string('cat_name');
             $table->string('cat_desc');
+            $table->timestamps();
         });
     }
 

@@ -7,11 +7,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>INSTI DASHBOARD</title>
   <!-- plugins:css -->
-  <link rel="stylesheet" href="css/themify-icons.css">
-  <link rel="stylesheet" href="css/vendor.bundle.base.css">
-  <link rel="stylesheet" href="css/vendor.bundle.addons.css">
+  <link rel="stylesheet" href="{{ asset('css/themify-icons.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/vendor.bundle.base.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/vendor.bundle.addons.css') }}">
  
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="{{ asset('css/style.css') }}">
   <!-- endinject -->
   <link rel="shortcut icon" href="images/favicon.png" />
 </head>
@@ -93,7 +93,7 @@
                             <th>Catégorie de Données</th>
                             <th>Nom de la Catégorie</th>
                             <th>Description de la Catégorie</th>
-                            <th>Action</th>
+                            <th>Actions</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -105,9 +105,8 @@
                             <td>{{ $offre->cat_name }}</td>
                             <td>{{ $offre->cat_desc }}</td>
                             <td>
-                              <a href="{{ route('offre.show', $offre->id) }}" class="btn btn-outline-primary">Voir</a>
-
-                              <a href="{{ url('edit/'.$offre->id) }}" class="btn btn-outline-warning">Modifier</a>
+                              <a href="{{ route('offre.show', $offre->data_cat) }}" class="btn btn-outline-primary">Voir</a>
+                              <a href="{{ url('/offres/edit/'.$offre->id) }}" class="btn btn-outline-warning">Modifier</a>
                               <form action="{{ url('/offres/destroy/'.$offre->id) }}" method="post" class="d-inline">
                                 @csrf
                                 @method('DELETE')
@@ -118,6 +117,11 @@
                           @endforeach
                         </tbody>
                     </table>
+                    <div class="form-group row">
+                      <div class="col-lg-8 offset-lg-3">
+                          <button type="submit" class="btn btn-primary">AJOUTER UNE CATEGORIE</button>
+                      </div>
+                  </div>
                   </div>
                 </div>
               </div>
@@ -142,18 +146,18 @@
   </div>
   <!-- container-scroller -->
   <!-- plugins:js -->
-  <script src="js/vendor.bundle.base.js"></script>
-  <script src="js/vendor.bundle.addons.js"></script>
+  <script src="{{ asset('js/vendor.bundle.base.js') }}"></script>
+  <script src="{{ asset('js/vendor.bundle.addons.js') }}"></script>
   <!-- endinject -->
   <!-- inject:js -->
-  <script src="js/off-canvas.js"></script>
-  <script src="js/hoverable-collapse.js"></script>
-  <script src="js/template.js"></script>
-  <script src="js/settings.js"></script>
-  <script src="js/todolist.js"></script>
+  <script src="{{ asset('js/off-canvas.js') }}"></script>
+  <script src="{{ asset('js/hoverable-collapse.js') }}"></script>
+  <script src="{{ asset('js/template.js') }}"></script>
+  <script src="{{ asset('js/settings.js') }}"></script>
+  <script src="{{ asset('js/todolist.js') }}"></script>
   <!-- endinject -->
   <!-- Custom js for this page-->
-  <script src="js/data-table.js"></script>
+  <script src="{{ asset('js/data-table.js') }}"></script>
   <!-- End custom js for this page-->
 </body>
 

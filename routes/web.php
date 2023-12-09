@@ -5,25 +5,24 @@ use App\Http\Controllers\OffreController;
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
 Route::get('/', [AdminController::class, 'login'] );
 
-Route::get('/show/{id}', [OffreController::class, 'show'])->name('offre.show');
-Route::get('/edit/{id}', [OffreController::class,'edit'])->name('offre.edit');
-Route::get('/offres/destroy/{id}', [OffreController::class,'destroy'])->name('offre.destroy');
+Route::get('offres/show/{data_cat}', [OffreController::class, 'show'])->name('offre.show');
+Route::get('/offres/edit/{id}', [OffreController::class,'edit'])->name('offre.edit');
+Route::delete('/offres/destroy/{id}', [OffreController::class, 'destroy'])->name('offre.destroy');
+
+Route::post('/modifieroffres/{id}', [OffreController::class, 'validerOffre'])->name('validerOffre');
+Route::post('/ajouteroffres', [OffreController::class, 'ajouterOffre'])->name('ajouterOffre');
 
 
-Route::get('/modify', [AdminController::class, 'modify'] );
+Route::get('/offresdetail/view/{id}', [OffreController::class,'editdetails'])->name('validerDetailOffre');
+Route::post('/offresdetail/edit/{id}', [OffreController::class,'validerDetailOffre'])->name('validerDetailOffre');
+Route::delete('/offresdetail/destroy/{id}', [OffreController::class, 'destroydetails'])->name('editdetails.destroy');
+
+Route::post('/ajouterDetailoffres', [OffreController::class, 'ajouterDetailOffre'])->name('ajouterDetailOffre');
+
+Route::get('/modify', [OffreController::class, 'modify'] );
 
 
 
